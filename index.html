@@ -170,7 +170,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2021-09-27 15:38:38 / 修改时间：21:43:42" itemprop="dateCreated datePublished" datetime="2021-09-27T15:38:38+08:00">2021-09-27</time>
+              <time title="创建时间：2021-09-27 15:38:38 / 修改时间：21:47:59" itemprop="dateCreated datePublished" datetime="2021-09-27T15:38:38+08:00">2021-09-27</time>
             </span>
 
           
@@ -184,12 +184,66 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>和检修删除下</p>
-<p><span class="math display">\[\begin{aligned}
-a &amp;= b + c \\
-  &amp;= d + e + f + g \\
-  &amp;= h + i
-\end{aligned}\]</span></p>
+          <h1 id="metasense-few-shot-adaptation-to-untrained-conditions-in-deep-mobile-sensing">MetaSense: Few-Shot Adaptation to Untrained Conditions in Deep Mobile Sensing</h1>
+<ul>
+<li>Taesik Gong, Yeonsu Kim, Jinwoo Shin, and Sung-Ju Lee. 2019. MetaSense: Few-Shot Adaptation to Untrained Conditions in Deep Mobile Sensing. In The 17th ACM Conference on Embedded Networked Sensor Systems (SenSys’19), November 10–13, 2019, New York, NY, USA. ACM, New York, NY, USA, 14 pages. https://doi.org/10.1145/3356250.3360020</li>
+<li><strong>Meta-learning:</strong> learn effective parameters that has an ability to adapt to an unseen condition.
+<ul>
+<li><a target="_blank" rel="noopener" href="https://lilianweng.github.io/lil-log/2018/11/30/meta-learning.html">Meta-Learning: Learning to Learn Fast</a></li>
+<li><a target="_blank" rel="noopener" href="https://wei-tianhao.github.io/blog/2019/09/17/meta-learning.html">元学习: 学习如何学习【译】</a></li>
+</ul></li>
+</ul>
+<h2 id="metasense">Metasense</h2>
+<p>域适应： - User dependency - Device dependency</p>
+<!-- ![overview](overview.JPG) -->
+/2021/09/27/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0Metasense/overview.JPG
+<ul>
+<li>few-shot adaptation system</li>
+<li>three task generation strategies</li>
+<li>quantify the problem through two case studies: human activity recognition and speech recognition.</li>
+</ul>
+<p>a model developer first trains a base model with the source dataset, and the model further adapts to the target user’s conditions using very small gradient steps of a few labeled data samples.</p>
+<h3 id="metasense-base-model-training">MetaSense Base-Model Training</h3>
+<p>使用meta-learning常用方法（MAML）</p>
+<h3 id="task-generation">Task Generation</h3>
+<!-- <img src='icds.JPG' style="zoom:150%"> -->
+/2021/09/27/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0Metasense/icds.JPG
+<p><span class="math inline">\(D_i \in D\)</span>, an individual condition dataset, <span class="math inline">\(\bigcup\limits^C_{c=1}D_c=D \ and \ D_c \cap D_d=\empty\)</span></p>
+<p>C代表情况数量(per user, per device) M代表label种类数量 icd代表一种情况下收集的数据集</p>
+<ul>
+<li>Per-condition tasks: <span class="math inline">\(T_i \in D_i,\ |T|=C\)</span></li>
+<li>Multi-conditioned tasks: 为每个label在随机选择一个icd选取数据，<span class="math inline">\(|T|=C\)</span></li>
+<li>每个task中包含所有类别的label</li>
+<li>每个task中各个label采样数量相同</li>
+</ul>
+<h3 id="parameter-updates">Parameter Updates</h3>
+<ul>
+<li><strong>MAML</strong>：训练完成后的模型具有对新task的学习域分布最敏感的参数
+<ul>
+<li>Chelsea Finn, Pieter Abbeel, and Sergey Levine. 2017. Model-agnostic meta-learning for fast adaptation of deep networks. In Proceedings of the 34th International Conference on Machine Learning - Volume 70 (ICML'17). 1126–1135. https://dl.acm.org/doi/10.5555/3305381.3305498</li>
+</ul></li>
+</ul>
+<!-- <img src='trainmodel.JPG' style="zoom:130%"> -->
+/2021/09/27/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0Metasense/trainmodel.JPG
+<h3 id="adaptation">Adaptation</h3>
+<p>使用target域中每个类1-2个sample更新模型。</p>
+<h2 id="experiment">Experiment</h2>
+<h3 id="har">HAR</h3>
+<!-- <img src='setting.JPG' style="zoom:130%"> -->
+/2021/09/27/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0Metasense/setting.JPG
+<ul>
+<li>Acc，Gyr（x,y,z）</li>
+<li>batchsize=256</li>
+</ul>
+<!-- <img src='harres.JPG' style="zoom:150%"> -->
+/2021/09/27/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0Metasense/harres.JPG
+<h3 id="speech-recognition">Speech recognition</h3>
+<ul>
+<li>14个单词</li>
+<li>10人, 30次/人</li>
+</ul>
+<!-- <img src='sres.JPG' style="zoom:150%"> -->
+/2021/09/27/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0Metasense/sres.JPG
 
       
     </div>
